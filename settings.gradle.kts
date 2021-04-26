@@ -1,3 +1,3 @@
 
-rootProject.name = "kotlin-book"
+rootProject.name = "kotlinbook"
 

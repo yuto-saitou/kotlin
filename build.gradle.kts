@@ -22,7 +22,3 @@ tasks.test {
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "1.8"
 }
-
-dependencies{
-//    ここにライブラリやフレームワークの依存関係を追加していく
-}

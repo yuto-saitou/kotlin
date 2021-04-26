@@ -1,9 +1,10 @@
 fun main(){
-    val text =
-    """改行もインデントもこのとおり
-ああああ"""
+    val text = "aaa"
     println(text)
+
     ifExample(100)
+
+
 }
 
 fun ifExample(num: Int){
@@ -16,3 +17,8 @@ fun ifExample(num: Int){
     }
 }
 
+
+
+fun printText(num: Int){
+
+}
