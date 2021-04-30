@@ -1,24 +1,47 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    id("org.springframework.boot") version "2.4.5"
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    id("com.arenagod.gradle.MybatisGenerator") version "1.4"  //add
     kotlin("jvm") version "1.4.32"
+    kotlin("plugin.spring") version "1.4.32"
 }
 
-group = "me.yutos"
-version = "1.0-SNAPSHOT"
+group = "com.example"   //example?
+version = "0.0.1-SNAPSHOT"
+java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation(kotlin("test-junit"))
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4")
+    implementation("org.mybatis.dynamic-sql:mybatis-dynamic-sql:1.2.1")  //add
+    implementation("mysql:mysql-connector-java:8.0.23")  //add
+    mybatisGenerator("org.mybatis.generator:mybatis-generator-core:1.4.0")  //add
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-tasks.test {
-    useJUnit()
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs = listOf("-Xjsr305=strict")
+        jvmTarget = "11"
+    }
 }
 
-tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "1.8"
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
+//add
+mybatisGenerator {
+    verbose = true
+    configFile = "${projectDir}/src/main/resources/generatorConfig.xml"
 }
